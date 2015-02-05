@@ -1,5 +1,5 @@
 ### CHANGE ###: file name 
-lims <- read.csv("FRFA02.csv", as.is=TRUE, header = TRUE)
+lims <- read.csv("LACT02_G.csv", as.is=TRUE, header = TRUE)
 colnames(lims)[1] <- 'SAMPLE_NUMBER'
 library(dplyr)
 

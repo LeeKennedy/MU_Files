@@ -290,7 +290,7 @@ cb4$Unit <- f0$Unit[1]
 cb4$Source <- "Duplicates"
 cb4 <- cb4[,c(5:9,4,10,1,2,3)]
 #cb4$RSD <- round(cb4[,10]*100/cb4[,8],3)
-colnames(cb4)[1:11] <- c('Matrix','Analyte','Conc','Method','Unit','Type','Source','Mean', 'n', 'sd')
+colnames(cb4)[1:10] <- c('Matrix','Analyte','Conc','Method','Unit','Type','Source','Mean', 'n', 'sd')
 cb5 <- cb4[cb4$n>6,]
 
 db4 <- rbind(b5,cb5)
@@ -395,3 +395,4 @@ for (i in 1:aa) {
         write.csv(Group, file = "Products.csv", row.names = TRUE)
    
 }
+
