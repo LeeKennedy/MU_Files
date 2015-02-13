@@ -6,7 +6,6 @@ library(data.table)
 library(psych)
 
 data.in <- read.csv("clean.units.csv", as.is=TRUE, header=TRUE)
-units <- "MG_P_KG"
 
 # Round 'start time' to the nearest hour to help define duplicates and replicates.
 date.temp <- dmy_hms(data.in$DATE_STARTED)
