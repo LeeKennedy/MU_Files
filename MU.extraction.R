@@ -6,6 +6,7 @@ library(data.table)
 library(psych)
 
 data.in <- read.csv("clean.units.csv", as.is=TRUE, header=TRUE)
+units <- "MG_P_KG"
 
 # Round 'start time' to the nearest hour to help define duplicates and replicates.
 date.temp <- dmy_hms(data.in$DATE_STARTED)
@@ -189,11 +190,20 @@ for (i in 1:m) {
 combined <- rbind(reprod, repeats)
 
 combined <- combined[c(4:12,3,1,2)]
-results = na.omit(combined)
+results1 = na.omit(combined)
 
 file.name <- combined[2,7]
 
-write.csv(results, file= paste(file.name,"csv", sep="."), row.names=FALSE)
+write.csv(results1, file= paste(file.name,"csv", sep="."), row.names=FALSE)
+
+# Delete duplicates that are too far apart --------------------------------
+
+results <- select(combined, everything())%>%
+        mutate(diff1 = A/B, diff2 = B/A)%>%
+        filter(diff1 > 0.7)%>%
+        filter(diff2 > 0.7)%>%
+        na.omit
+
 
 f0 <- results
 f0$Prod2 <- f0$Product
