@@ -3,7 +3,7 @@
 rm(list=ls())
 
 # Import File ----------------------------------------------------------------------------- 
-lims <- read.csv("ICPM01-Lead.csv", stringsAsFactors = FALSE,header = TRUE)
+lims <- read.csv("CHLN01-Choline.csv", stringsAsFactors = FALSE,header = TRUE)
 
 colnames(lims)[1] <- 'SAMPLE_NUMBER'
 
