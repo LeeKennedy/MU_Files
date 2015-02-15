@@ -1,9 +1,13 @@
 ### CHANGE ###: file name 
-lims <- read.csv("TVON01.csv", stringsAsFactors = FALSE,header = TRUE)
+# Clear Environment -----------------------------------------------------------------------
+rm(list=ls())
+
+# Import File ----------------------------------------------------------------------------- 
+lims <- read.csv("ICPM01-Lead.csv", stringsAsFactors = FALSE,header = TRUE)
 
 colnames(lims)[1] <- 'SAMPLE_NUMBER'
 
-#Converts all units to mg/kg
+#Converts all units to mg/kg---------------------------------------------------------------
 units <- "MG_P_KG"
 
 unit <- which((lims$UNITS=="G_P_100G"))
@@ -26,8 +30,9 @@ unit <- which((lims$UNITS=="MG_P_G"))
 lims$UNITS[unit] <- "MG_P_KG"
 lims$ENTRY[unit] <- as.numeric(lims$ENTRY[unit]) * 1000
 
+#Omits any remaining items with irregular units.----------------------------------------------
 lims2 <- lims[which(lims$UNITS %in% "MG_P_KG"),]
 
-#Omits any remaining items with irregular units.
+# Export data file ---------------------------------------------------------------------------
 write.csv(lims2, file = "clean.units.csv", row.names = FALSE)
 

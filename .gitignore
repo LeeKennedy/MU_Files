@@ -1,3 +1,7 @@
 .Rproj.user
 .Rhistory
 .RData
+
+# Ignore Graphics
+*.jpg
+*.png

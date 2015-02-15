@@ -5,78 +5,82 @@ library(tidyr)
 library(data.table)
 library(psych)
 
-data.in <- read.csv("clean.units.csv", as.is=TRUE, header=TRUE)
 
-# Round 'start time' to the nearest hour to help define duplicates and replicates.
+data.in <- read.csv("clean.units.csv", as.is=TRUE, header=TRUE)
+colnames(data.in)[8] <- "UNITS"
+
+# Round 'start time' to the nearest hour to help define duplicates and replicates.------------
 date.temp <- dmy_hms(data.in$DATE_STARTED)
 date.temp2 <- round_date(date.temp, "hour")
 data.in$DATE_STARTED <- date.temp2
 
-# sort, remove odd units, remove negative numbers,remove NAs
+# sort, remove odd units, remove negative numbers,remove NAs----------------------------------
 data.in3 <- select(data.in, everything())%>%
         arrange(SAMPLE_NUMBER)%>%
         filter(UNITS %in% units, ENTRY>0)%>%
         mutate(ENTRY = as.numeric(as.character(ENTRY)))
-        #na.omit
+        
 
-#Extracts spike data.
+#Extracts spike data.-------------------------------------------------------------------------
 data.in.spike <- data.in3[which(data.in3$PRODUCT_GRADE =="SPIKE" | data.in3$PRODUCT_GRADE =="SPIKE_REC" ),]
 
-#Extract non-spike data.
+#Extract non-spike data.----------------------------------------------------------------------
 data.in3 <- data.in3[which(data.in3$PRODUCT_GRADE != "SPIKE"),]
 data.in3 <- data.in3[which(data.in3$PRODUCT_GRADE != "SPIKE_REC"),]
 
-# Extracts SRM data.
+# Extracts SRM data.--------------------------------------------------------------------------
 data.in.srm <- data.in3[which(data.in3$PRODUCT %in% "QC" & data.in3$PRODUCT_GRADE %in% "SRM"),]
 
-# Identifies duplicates.
+# Identifies duplicates.----------------------------------------------------------------------
 data.in.dups  <- data.in3[duplicated(data.in3[c("ORIGINAL_SAMPLE")]) | duplicated(data.in3[c("ORIGINAL_SAMPLE")], fromLast = TRUE),]
 
-# Replaces sample number with original sample number.
+# Replaces sample number with original sample number.-----------------------------------------
 data.in.dups$SAMPLE_NUMBER <- data.in.dups$ORIGINAL_SAMPLE
 
-#Inserts common name in every record.
+#Inserts common name in every record.---------------------------------------------------------
 data.in.dups$REPORTED_NAME <- data.in.dups$REPORTED_NAME[1]
 
 
-# Saves Spike and SRM files separately.
+# Saves Spike and SRM files separately.------------------------------------------------------
 write.csv(data.in.srm, file = "srmdata.csv", row.names = FALSE)
 write.csv(data.in.spike, file = "spikedata.csv", row.names = FALSE)
 
-#Reorder columns
+#Reorder columns-----------------------------------------------------------------------------
 lims2 <- data.in.dups[,(c(1:2,17,3:11))]
 
-# Selects duplicates and original
+# Selects duplicates and original------------------------------------------------------------
 lims5 <- lims2[duplicated(lims2[c("SAMPLE_NUMBER","REPORTED_NAME")]) | duplicated(lims2[c("SAMPLE_NUMBER","REPORTED_NAME")], fromLast = TRUE),]
 
-# Sorts data
+# Sorts data---------------------------------------------------------------------------------
 lims5 <- lims5[with(lims5, order(lims5$REPORTED_NAME, lims5$SAMPLE_NUMBER, lims5$REPLICATE_COUNT)), ]
 
+# Identifies replicates ---------------------------------------------------------------------
 rl <- rle(lims5$SAMPLE_NUMBER )
 group2 <- rep(rl$lengths != 2 , times = rl$lengths )
 group2 <- sub("FALSE","No",group2)
 group2 <- sub("TRUE","Yes",group2)
 
-# Sorts data
+# Sorts data ----------------------------------------------------------------------------------
 lims5 <- lims5[order(lims5$SAMPLE_NUMBER, as.Date(lims5$DATE_STARTED, format="%d/%m/%Y"),as.Date(lims5$LOGIN_DATE, format="%d/%m/%Y")), ]
 
-# Removed QC descriptors
+# Removed QC descriptors ----------------------------------------------------------------------
 x100 <- with(lims5, ave(lims5$PRODUCT,lims5$SAMPLE_NUMBER,FUN=function(i) i[i!="QC"][1])  )
 lims5$PRODUCT <- x100
 
-#Calculate new replicate numbers
+#Calculate new replicate numbers ---------------------------------------------------------------
 Rep2 <- sequence(table(lims5$SAMPLE_NUMBER))
 Rep3 <- sequence(table(lims5$DATE_STARTED))
 #Add New Replicates to data file
 lims6 <- cbind(lims5, Rep2, Rep3, group2)
 
-#Adds extra columns, as characters
+#Adds extra columns, as characters ------------------------------------------------------------
 lims6[,c("RD","Type")] <- NA_character_
 
+# Create composite sample number & date for sorting--------------------------------------------
 lims6[, c("sample.date")] <- paste(lims6$SAMPLE_NUMBER, lims6$DATE_STARTED)
 lims6$Rep3 <- sequence(table(lims6$sample.date))
 
-#Designate (D)uplicates and (R)eplicates.
+#Designate (D)uplicates and (R)eplicates.-----------------------------------------------------
 lims6 <- within(lims6, {
         RD <- rep("R", nrow(lims6))
         RD[duplicated(lims6$sample.date) | 
@@ -88,13 +92,13 @@ x2 <- which((lims6$RD=="R" & lims6$Rep2==1))
 lims6$Type[x1] <- "Repeatability"
 lims6$Type[x2] <- "Interim Precision"
 
-# Re-orders columns, deletes unwanted.
+# Re-orders columns, deletes unwanted.-------------------------------------------------------
 lims6 <- lims6[,(c(1:11,14,15,13,16))]
 
 k <- unique(lims6$SAMPLE_NUMBER)
 m <- length(unique(lims6$SAMPLE_NUMBER))
 
-
+# Create empty dataframe for exporting precision data -----------------------------------------
 reprod <- data.frame(
         A = numeric(),
         B = numeric(),
@@ -109,6 +113,7 @@ reprod <- data.frame(
         Name <- as.character(),
         Unit <- as.character())
 
+# Loop to calculate repeatability and reproducibility for product groups --------------------
 for (i in 1:m) {
         test3 <- filter(lims6, SAMPLE_NUMBER == k[i])
         #if("R" %in% test3$RD == FALSE) next()
@@ -186,44 +191,65 @@ for (i in 1:m) {
         }
 }      
 
+# Combine the two precision types, removing NAs------------------------------------------------
 combined <- rbind(reprod, repeats)
 
 combined <- combined[c(4:12,3,1,2)]
-results = na.omit(combined)
+results <- na.omit(combined)
+results1 <- results
 
 file.name <- combined[2,7]
 
-write.csv(results, file= paste(file.name,"csv", sep="."), row.names=FALSE)
+# Remove pairs more than 0.7x apart ---------------------------------------------------------
+j <- nrow(results)
 
+for (i in 1:j) {
+        if(results$A[i] < results$B[i]) { 
+      results$ratio[i] = results$A[i]/results$B[i] 
+        }else{ results$ratio[i] = results$B[i]/results$A[i]
+        }    
+}
+
+results <- select(results, everything())%>%
+        filter(ratio > 0.7)
+
+# Write data file WITHOUT 0.7x pairs removed, for Excel use -------------------------------
+write.csv(results1, file= paste(file.name,".csv", sep=""), row.names=FALSE)
+
+# Cleaning Precision data -----------------------------------------------------------------
 f0 <- results
 f0$Prod2 <- f0$Product
-
-
 ff1 <- subset(f0, Type=="Interim Precision")
 f1 <- ff1
-plot(ff1$A)
 
+# Calculate differences and square differences --------------------------------------------
 f1 <- mutate(f1, diff = (B-A), sqr = diff^2)
 
+# FUNCTION - calculate expansion coefficient ------------------------------------------------
 kcalc <- function(x){
         k <- qt((1-0.05/2),length(x))
         k
 }
 
+# FUNCTION - calculate MU --------------------------------------------------------------------
 mu <- function(x){
         m <- kcalc(x)*sqrt((sum(x^2)/(2*length(x))))
         m
 }
 
+# FUNCTION - calculate sd --------------------------------------------------------------------
 stdd <- function(x){
         mm <- sqrt((sum(x^2)/(2*length(x))))
         mm
 }
+
+# FUNCTION - calculate duplicate tolerance --- ------------------------------------------------
 retest <- function(x){
         rtst <- mu(x)*sqrt(2)
         rtst
 }
 
+# FUNCTION - calculate outliers ---------------------------------------------------------------
 remove.outliers <- function(x, na.rm = TRUE, ...) {
         qnt <- quantile(x, probs=c(.25, .75), na.rm = na.rm, ...)
         H <- 1.5 * IQR(x, na.rm = na.rm)
@@ -233,6 +259,7 @@ remove.outliers <- function(x, na.rm = TRUE, ...) {
         y
 }
 
+# Tidying data ----------------------------------------------------------------------------
 f3 <- split(f1$diff, f1$Product)
 f4 <- lapply(f3, remove.outliers)
 f5 <- unsplit(f4, f1$Product)
@@ -240,7 +267,7 @@ f5 <- unsplit(f4, f1$Product)
 f1a <- cbind(f1,f5)
 f1 <- na.omit(f1a)
 
-
+# Summarising data ---------------------------------------------------------------------------
 b1 <- tapply(f1$A, f1$Product, length)
 b2 <- tapply(f1$A, f1$Product, mean)
 b3c <- tapply(f1$f5, f1$Product, stdd)
@@ -263,7 +290,6 @@ b6 <- ifelse(f4=="NA", "Yes", "No")
 
 ff2 <- subset(f0, Type=="Repeatability")
 f2 <- ff2
-plot(ff2$A)
 tail(sort(ff2$A))
 
 f2 <- mutate(f2, diff = (B-A), sqr = diff^2)
@@ -294,11 +320,11 @@ colnames(cb4)[1:10] <- c('Matrix','Analyte','Conc','Method','Unit','Type','Sourc
 cb5 <- cb4[cb4$n>6,]
 
 db4 <- rbind(b5,cb5)
+
+# Export Product precision data --------------------------------------------------------------
 write.csv(db4, file = "Products.csv", row.names = TRUE)
 
-boxplot(f1$A~f1$Product)
-boxplot(f2$A~f2$Product)
-
+# SRM interrogation --------------------------------------------------------------------------
 data.in4 <- read.csv("srmdata.csv", as.is=TRUE, header=TRUE)
 
 if(nrow(data.in4) >0) { 
@@ -313,7 +339,7 @@ data.in4 <- cbind(data.in4, dis)
 
 data.in2 <- split(data.in4[,9],data.in4[,19])
 
-
+# Boxplot of SRMs in play --------------------------------------------------------
 boxplot(data.in2)
 aa <- length(data.in2)
 
@@ -367,7 +393,8 @@ for (i in 1:aa) {
         abline(h=LCL, col = "red", lty=2, lwd=2)
         
         hist(clean, breaks=20)
-       
+
+
         describe(clean)
         
         Clines
