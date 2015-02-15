@@ -195,6 +195,7 @@ for (i in 1:m) {
 combined <- rbind(reprod, repeats)
 
 combined <- combined[c(4:12,3,1,2)]
+<<<<<<< HEAD
 results <- na.omit(combined)
 results1 <- results
 
@@ -202,6 +203,22 @@ file.name <- combined[2,7]
 
 # Remove pairs more than 0.7x apart ---------------------------------------------------------
 j <- nrow(results)
+=======
+results1 = na.omit(combined)
+
+file.name <- combined[2,7]
+
+write.csv(results1, file= paste(file.name,"csv", sep="."), row.names=FALSE)
+
+# Delete duplicates that are too far apart --------------------------------
+
+results <- select(combined, everything())%>%
+        mutate(diff1 = A/B, diff2 = B/A)%>%
+        filter(diff1 > 0.7)%>%
+        filter(diff2 > 0.7)%>%
+        na.omit
+
+>>>>>>> FETCH_HEAD
 
 for (i in 1:j) {
         if(results$A[i] < results$B[i]) { 

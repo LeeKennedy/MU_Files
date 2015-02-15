@@ -1,9 +1,13 @@
 ### CHANGE ###: file name 
+<<<<<<< HEAD
 # Clear Environment -----------------------------------------------------------------------
 rm(list=ls())
 
 # Import File ----------------------------------------------------------------------------- 
 lims <- read.csv("CHLN01-Choline.csv", stringsAsFactors = FALSE,header = TRUE)
+=======
+lims <- read.csv("TAUR01.csv", stringsAsFactors = FALSE,header = TRUE)
+>>>>>>> FETCH_HEAD
 
 colnames(lims)[1] <- 'SAMPLE_NUMBER'
 
