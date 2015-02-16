@@ -195,15 +195,7 @@ for (i in 1:m) {
 combined <- rbind(reprod, repeats)
 
 combined <- combined[c(4:12,3,1,2)]
-<<<<<<< HEAD
-results <- na.omit(combined)
-results1 <- results
 
-file.name <- combined[2,7]
-
-# Remove pairs more than 0.7x apart ---------------------------------------------------------
-j <- nrow(results)
-=======
 results1 = na.omit(combined)
 
 file.name <- combined[2,7]
@@ -217,8 +209,6 @@ results <- select(combined, everything())%>%
         filter(diff1 > 0.7)%>%
         filter(diff2 > 0.7)%>%
         na.omit
-
->>>>>>> FETCH_HEAD
 
 for (i in 1:j) {
         if(results$A[i] < results$B[i]) { 
