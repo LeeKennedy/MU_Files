@@ -54,6 +54,9 @@ lims5 <- lims2[duplicated(lims2[c("SAMPLE_NUMBER","REPORTED_NAME")]) | duplicate
 # Sorts data---------------------------------------------------------------------------------
 lims5 <- lims5[with(lims5, order(lims5$REPORTED_NAME, lims5$SAMPLE_NUMBER, lims5$REPLICATE_COUNT)), ]
 
+# Omit records with no start date -----------------------------------------------------------
+lims5 <- lims5[!is.na(lims5$DATE_STARTED),]
+
 # Identifies replicates ---------------------------------------------------------------------
 rl <- rle(lims5$SAMPLE_NUMBER )
 group2 <- rep(rl$lengths != 2 , times = rl$lengths )
@@ -66,6 +69,8 @@ lims5 <- lims5[order(lims5$SAMPLE_NUMBER, as.Date(lims5$DATE_STARTED, format="%d
 # Removed QC descriptors ----------------------------------------------------------------------
 x100 <- with(lims5, ave(lims5$PRODUCT,lims5$SAMPLE_NUMBER,FUN=function(i) i[i!="QC"][1])  )
 lims5$PRODUCT <- x100
+
+
 
 #Calculate new replicate numbers ---------------------------------------------------------------
 Rep2 <- sequence(table(lims5$SAMPLE_NUMBER))
