@@ -10,7 +10,14 @@ data.in <- read.csv("clean.units.csv", as.is=TRUE, header=TRUE)
 colnames(data.in)[8] <- "UNITS"
 
 # Round 'start time' to the nearest hour to help define duplicates and replicates.------------
-date.temp <- dmy_hms(data.in$DATE_STARTED)
+#First check for hm or hms format ------------------------------------------------------------
+if(nchar(data.in$LOGIN_DATE[1])==13){
+        date.temp <- dmy_hm(data.in$DATE_STARTED)
+}else{
+        date.temp <- dmy_hms(data.in$DATE_STARTED)
+}
+
+
 date.temp2 <- round_date(date.temp, "hour")
 data.in$DATE_STARTED <- date.temp2
 
