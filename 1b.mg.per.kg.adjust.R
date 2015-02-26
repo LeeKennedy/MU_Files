@@ -4,7 +4,7 @@
 rm(list=ls())
 
 # Import File ----------------------------------------------------------------------------- 
-lims <- read.csv("totalB6.csv", stringsAsFactors = FALSE,header = TRUE)
+lims <- read.csv("WHPN01.csv", stringsAsFactors = FALSE,header = TRUE)
 
 
 colnames(lims)[1] <- 'SAMPLE_NUMBER'
