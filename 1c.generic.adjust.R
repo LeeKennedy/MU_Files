@@ -3,7 +3,7 @@
 rm(list=ls())
 
 # Import File ----------------------------------------------------------------------------- 
-lims <- read.csv("WH.csv", stringsAsFactors = FALSE, header = TRUE)
+lims <- read.csv("MOIS23.csv", as.is=TRUE, header = TRUE)
 colnames(lims)[1] <- 'SAMPLE_NUMBER'
 
 units <- lims$UNITS[1]
