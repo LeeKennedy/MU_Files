@@ -1,13 +1,13 @@
 # Clear Environment -----------------------------------------------------------------------
 rm(list=ls())
 
-data <- read.csv("WHPN01.csv", as.is=TRUE, header=TRUE)
+data <- read.csv("VITE04.csv", as.is=TRUE, header=TRUE)
 colnames(data)[1] <- "SAMPLE_NUMBER"
 library(dplyr)
 
-
-unique(data$REPORTED_NAME)
 table(data$REPORTED_NAME)
+unique(data$UNITS)
+
 
 # Split & recalculate --------------------------------------------------------------------
 data.A <- data %>%
