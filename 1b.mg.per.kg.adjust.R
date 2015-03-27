@@ -4,8 +4,12 @@
 rm(list=ls())
 
 # Import File ----------------------------------------------------------------------------- 
+<<<<<<< HEAD
 lims <- read.csv("LACA02L.csv", stringsAsFactors = FALSE,header = TRUE)
 
+=======
+lims <- read.csv("Zinc_a.csv", as.is=TRUE, header = TRUE)
+>>>>>>> origin/master
 
 colnames(lims)[1] <- 'SAMPLE_NUMBER'
 

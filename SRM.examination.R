@@ -5,6 +5,7 @@ library(psych)
 data.in4 <- read.csv("srmdata.csv", as.is=TRUE, header=TRUE)
 analyte <- data.in4$ANALYSIS[1]
 units <- tolower(data.in4$UNIT[1])
+Method.code <- analyte
 
 if(nrow(data.in4) >0) { 
         
