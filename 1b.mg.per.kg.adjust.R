@@ -4,7 +4,7 @@
 rm(list=ls())
 
 # Import File ----------------------------------------------------------------------------- 
-lims <- read.csv("WHPN01.csv", stringsAsFactors = FALSE,header = TRUE)
+lims <- read.csv("LACA02L.csv", stringsAsFactors = FALSE,header = TRUE)
 
 
 colnames(lims)[1] <- 'SAMPLE_NUMBER'
@@ -34,6 +34,9 @@ lims$ENTRY[unit] <- as.numeric(lims$ENTRY[unit]) * 1000
 
 #Omits any remaining items with irregular units.----------------------------------------------
 lims2 <- lims[which(lims$UNITS %in% "MG_P_KG"),]
+
+# Set Horwitz value -------------------------------------------------------------------------
+hv <- 6
 
 # Export data file ---------------------------------------------------------------------------
 write.csv(lims2, file = "clean.units.csv", row.names = FALSE)

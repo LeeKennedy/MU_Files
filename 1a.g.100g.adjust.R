@@ -3,7 +3,7 @@
 rm(list=ls())
 
 # Import File -----------------------------------------------------------------------------
-lims <- read.csv("WHPN01.csv", as.is=TRUE, header = TRUE)
+lims <- read.csv("PROT01.csv", as.is=TRUE, header = TRUE)
 colnames(lims)[1] <- 'SAMPLE_NUMBER'
 
 # Dependent Libraries ---------------------------------------------------------------------
@@ -39,6 +39,9 @@ lims$ENTRY[unit] <- as.numeric(lims$ENTRY[unit]) * 0.000001
 
 #Omits any remaining items with irregular units.---------------------------------------------
 lims2 <- lims[which(lims$UNITS %in% "G_P_100G"),]
+
+# Set Horwitz value -------------------------------------------------------------------------
+hv <- 2
 
 #Exports file -------------------------------------------------------------------------------
 write.csv(lims2, file = "clean.units.csv", row.names = FALSE)
