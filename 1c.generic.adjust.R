@@ -3,11 +3,9 @@
 rm(list=ls())
 
 # Import File ----------------------------------------------------------------------------- 
-<<<<<<< HEAD
-lims <- read.csv("DENS03.csv", stringsAsFactors = FALSE, header = TRUE)
-=======
-lims <- read.csv("MOIS23.csv", as.is=TRUE, header = TRUE)
->>>>>>> origin/master
+
+lims <- read.csv("MOIS22.csv", as.is=TRUE, header = TRUE)
+
 colnames(lims)[1] <- 'SAMPLE_NUMBER'
 
 units <- lims$UNITS[1]
