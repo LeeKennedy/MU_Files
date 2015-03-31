@@ -278,6 +278,7 @@ remove.outliers <- function(x, na.rm = TRUE, ...) {
         y
 }
 
+# Create dummy data for case where no Interim Precision -----------------------------------
 f1_flag = 0
 
 if(nrow(f1) == 0) {

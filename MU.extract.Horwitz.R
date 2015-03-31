@@ -267,6 +267,16 @@ remove.outliers <- function(x, na.rm = TRUE, ...) {
         y
 }
 
+# Create dummy data for case where no Interim Precision -----------------------------------
+f1_flag = 0
+
+if(nrow(f1) == 0) {
+        f1[1,] <- c(99,NA,NA,"dummy",NA,NA,NA,NA,NA,NA,99,99,99,99,99,"dummy",99,99)
+        f1[2,] <- c(99,NA,NA,"dummy",NA,NA,NA,NA,NA,NA,99,99,99,99,99,"dummy",99,99)
+        f1[,c(1,11:15,17:18)] <- sapply(f1[,c(1,11:15,17:18)], as.numeric)
+        f1_flag = 1
+}
+
 # Tidying data ----------------------------------------------------------------------------
 f3 <- split(f1$diff, f1$Product)
 f4 <- lapply(f3, remove.outliers)
@@ -274,7 +284,12 @@ f4a <- lapply(f4, remove.outliers)
 f5 <- unsplit(f4a, f1$Product)
 
 f1a <- cbind(f1,f5)
-f1 <- na.omit(f1a)
+
+if(f1_flag == 0) {
+        f1 <- na.omit(f1a)
+}else{
+        f1 = f1a
+}
 
 # Summarising data ---------------------------------------------------------------------------
 b1 <- tapply(f1$A, f1$Product, length)

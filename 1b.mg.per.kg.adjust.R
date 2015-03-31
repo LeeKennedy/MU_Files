@@ -4,14 +4,12 @@
 rm(list=ls())
 
 # Import File ----------------------------------------------------------------------------- 
-<<<<<<< HEAD
-lims <- read.csv("LACA02L.csv", stringsAsFactors = FALSE,header = TRUE)
 
-=======
-lims <- read.csv("Zinc_a.csv", as.is=TRUE, header = TRUE)
->>>>>>> origin/master
+lims <- read.csv("MICP06-Zinc.csv", as.is=TRUE, header = TRUE)
+
 
 colnames(lims)[1] <- 'SAMPLE_NUMBER'
+
 
 #Converts all units to mg/kg---------------------------------------------------------------
 units <- "MG_P_KG"
