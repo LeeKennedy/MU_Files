@@ -2,7 +2,7 @@
 rm(list=ls())
 
 
-data <- read.csv("FOLA04.csv", as.is=TRUE, header=TRUE)
+data <- read.csv("VITE05-Vitamin_E.csv", as.is=TRUE, header=TRUE)
 
 colnames(data)[1] <- "SAMPLE_NUMBER"
 library(dplyr)
