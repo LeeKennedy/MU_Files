@@ -345,6 +345,7 @@ colnames(cb4)[1:10] <- c('Matrix','Analyte','Conc','Method','Unit','Type','Sourc
 cb5 <- cb4[cb4$n>6,]
 
 db4 <- rbind(b5,cb5)
+db4 <- db4[,c(1,2,4:10)]
 
 # Export Product precision data --------------------------------------------------------------
 write.csv(db4, file = "Products.csv", row.names = TRUE)
@@ -442,6 +443,8 @@ for (i in 1:aa) {
         
         ifelse(srm.in ==1, Group <- srm, Group <- rbind(Group, srm))
 }
+
+Group <- Group[,c(1,2,4:10)]
         Group <- rbind(Group, db4)
         Group <- select(Group, everything())%>% arrange(Matrix)
         write.csv(Group, file = "Products.csv", row.names = TRUE)
