@@ -271,9 +271,9 @@ remove.outliers <- function(x, na.rm = TRUE, ...) {
 f1_flag = 0
 
 if(nrow(f1) == 0) {
-        f1[1,] <- c(99,NA,NA,"dummy",NA,NA,NA,NA,NA,NA,99,99,99,99,99,"dummy",99,99)
-        f1[2,] <- c(99,NA,NA,"dummy",NA,NA,NA,NA,NA,NA,99,99,99,99,99,"dummy",99,99)
-        f1[,c(1,11:15,17:18)] <- sapply(f1[,c(1,11:15,17:18)], as.numeric)
+        f1[1,] <- c(99,NA,NA,"dummy",NA,NA,NA,NA,NA,NA,99,99,99,99,99,"dummy",99)
+        f1[2,] <- c(99,NA,NA,"dummy",NA,NA,NA,NA,NA,NA,99,99,99,99,99,"dummy",99)
+        f1[,c(1,11:15,17)] <- sapply(f1[,c(1,11:15,17)], as.numeric)
         f1_flag = 1
 }
 
