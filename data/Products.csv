@@ -1,0 +1,8 @@
+"","Matrix","Analyte","Method","Unit","Type","Source","Mean","n","sd"
+"1","CEREAL_PRD","Ash @ 550°C","ASHS04","G_P_100G","Interim Precision","Replicates",5.32814025488,10,0.0607571293576784
+"2","CEREAL_PRD","Ash @ 550°C","ASHS04","G_P_100G","Repeatability","Duplicates",2.94704540457143,7,0.0134157068241879
+"3","FISH","Ash @ 550°C","ASHS04","G_P_100G","Repeatability","Duplicates",1.45659259164667,15,0.0239620972175172
+"4","PASTA","Ash @ 550°C","ASHS04","G_P_100G","Repeatability","Duplicates",1.432139003275,8,0.0101973577032606
+"5","SAUCES","Ash @ 550°C","ASHS04","G_P_100G","Repeatability","Duplicates",1.58240437953077,13,0.031070729333033
+"6","SRM Matrix","Ash @ 550°C","ASHS04","G_P_100G","Interim Precision","IRM001",2.81054438393173,104,0.0435342814058993
+"7","SRM Matrix","Ash @ 550°C","ASHS04","G_P_100G","Interim Precision","IRM001A",3.26196109421817,644,0.0432133007006491
