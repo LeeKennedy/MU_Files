@@ -291,6 +291,8 @@ if(f1_flag == 0) {
         f1 = f1a
 }
 
+write.csv(f1, file= paste("bootstrap_",file.name,".csv", sep=""), row.names=FALSE)
+
 # Summarising data ---------------------------------------------------------------------------
 b1 <- tapply(f1$A, f1$Product, length)
 b2 <- tapply(f1$A, f1$Product, mean)
