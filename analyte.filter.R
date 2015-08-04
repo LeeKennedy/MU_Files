@@ -1,18 +1,19 @@
-# Clear Environment -----------------------------------------------------------------------
+# Clear Environment ---------------------------------------------
 rm(list=ls())
 
 
-data <- read.csv("SOLI05.csv", as.is=TRUE, header=TRUE)
+lims <- read.csv("MOIS06.csv", as.is=TRUE, header=TRUE)
 
-colnames(data)[1] <- "SAMPLE_NUMBER"
+colnames(lims)[1] <- "SAMPLE_NUMBER"
 library(dplyr)
 
-table(data$REPORTED_NAME)
-unique(data$UNITS)
-unique(data$ANALYSIS)
+table(lims$REPORTED_NAME)
+unique(lims$UNITS)
+table(lims$UNITS)
+unique(lims$ANALYSIS)
 
 
 #-----------------
 
-data <- data %>%
-        filter(REPORTED_NAME == "Insolubilty Index @ 60Â°C")
+lims <- lims %>%
+        filter(UNITS == "PCT_V-V")
