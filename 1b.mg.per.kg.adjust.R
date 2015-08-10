@@ -1,11 +1,11 @@
 ### CHANGE ###: file name 
 
 # Clear Environment -----------------------------------------------------------------------
-rm(list=ls())
+#rm(list=ls())
 
 # Import File ----------------------------------------------------------------------------- 
 
-lims <- read.csv("Tyramine.csv", as.is=TRUE, header = TRUE)
+#lims <- read.csv("Tyramine.csv", as.is=TRUE, header = TRUE)
 
 
 colnames(lims)[1] <- 'SAMPLE_NUMBER'
