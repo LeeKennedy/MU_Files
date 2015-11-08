@@ -2,7 +2,7 @@
 rm(list=ls())
 
 
-lims <- read.csv("MOIS01a.csv", as.is=TRUE, header=TRUE)
+lims <- read.csv("SR_Fats.csv", as.is=TRUE, header=TRUE)
 
 
 colnames(lims)[1] <- "SAMPLE_NUMBER"
@@ -20,5 +20,5 @@ unique(lims$ANALYSIS)
 
 
 lims <- lims %>%
-        filter(ANALYSIS == "MICP010406")
+        filter(UNITS == "MG_P_L")
 
