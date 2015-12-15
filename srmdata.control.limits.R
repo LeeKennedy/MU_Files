@@ -33,9 +33,9 @@ Labels <- c("UCL", "UWL", "Centre", "LWL", "LCL", "MU +/-")
 Clines <- cbind(Labels, round(CC,3))
 Clines <- as.data.frame(Clines)
 
-plot(data.in$ENTRY, type="p", pch= 19, cex=0.6, col ="red",ylim = c(LCL*0,UCL*1.1), ylab = "", xlab=srm)
+plot(data.in$ENTRY, type="p", pch= 19, cex=0.6, col ="red",ylim = c(LCL*0.75,UCL*1.1), ylab = "", xlab=srm)
 par(new=T)
-plot(clean, type="o", pch=19, cex=0.75, col="grey40",ylim = c(LCL*0,UCL*1.1), ylab = "", xlab=srm)
+plot(clean, type="o", pch=19, cex=0.75, col="grey40",ylim = c(LCL*0.75,UCL*1.1), ylab = "", xlab=srm)
 
 abline(h=Centre, col = "blue", lty=2, lwd=2)
 abline(h=UCL, col = "red", lty=2, lwd=2)

@@ -2,7 +2,7 @@
 rm(list=ls())
 
 
-lims <- read.csv("SR_Fats.csv", as.is=TRUE, header=TRUE)
+lims <- read.csv("B6.csv", as.is=TRUE, header=TRUE)
 
 
 colnames(lims)[1] <- "SAMPLE_NUMBER"
@@ -14,10 +14,11 @@ unique(lims$UNITS)
 table(lims$UNITS)
 unique(lims$ANALYSIS)
 
-
+lims$REPORTED_NAME <- "Vitamin B6"
 
 #-----------------
 
+lims$REPORTED_NAME <- "Vitamin B2"
 
 lims <- lims %>%
         filter(UNITS == "MG_P_L")
