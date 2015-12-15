@@ -3,7 +3,7 @@ rm(list=ls())
 library (dplyr)
 
 
-lims <- read.csv("Molybdenum.csv", as.is=TRUE, header=TRUE)
+lims <- read.csv("FATS01.csv", as.is=TRUE, header=TRUE)
 
 
 colnames(lims)[1] <- "SAMPLE_NUMBER"
