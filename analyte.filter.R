@@ -4,7 +4,7 @@ library (dplyr)
 
 
 
-lims <- read.csv("VITA12.csv", as.is=TRUE, header=TRUE)
+lims <- read.csv("NITF02.csv", as.is=TRUE, header=TRUE)
 
 
 colnames(lims)[1] <- "SAMPLE_NUMBER"
@@ -22,7 +22,7 @@ lims$REPORTED_NAME <- "Vitamin B2"
 
 lims <- lims %>%
 
-        filter(UNITS == "MG_P_L")
+        filter(REPORTED_UNITS == "PCT_M-V")
 
 
         filter(PRODUCT_GRADE == "EAP00701" |
