@@ -1,7 +1,7 @@
 library(dplyr)
 library(ggplot2)
 
-data1 <- read.csv("bootstrap_VITB011208.csv", header = TRUE, as.is = TRUE)
+data1 <- read.csv("bootstrap_LACT010493.csv", header = TRUE, as.is = TRUE)
 
 # Functions --------------------------------------------------------------
 MU <- function (x) {
@@ -9,6 +9,7 @@ MU <- function (x) {
 }
 
 bs <- rep(0,10000)
+units_A <- data1$Unit[1]
 
 #-------------------------------------------------------------------------
 
@@ -16,13 +17,11 @@ Prod <- unique(data1$Product)
 Prod_len <- length(Prod)
 
 # Create Data Frame with NA's
-Bootstrap=data.frame(matrix(NA, nrow=Prod_len, ncol=5))
-
-# Confirm Size of Data Frame
-dim(Bootstrap)
+Bootstrap=data.frame(matrix(NA, nrow=Prod_len, ncol=7))
 
 # Change Variable Names
-names(Bootstrap) <- c("Product","n", "Lower", "MU", "Upper")
+names(Bootstrap) <- c("Product", "n", "Units", "level", "Lower", "MU", "Upper")
+Bootstrap$level <- as.numeric(Bootstrap$level)
 
 
 j <- 1
@@ -33,6 +32,8 @@ for (j in 1:Prod_len) {
         data2 <- data1 %>%
                 filter(Product == Prod_n)
         N <- nrow(data2)
+        
+        level_A <- mean(data2$A)
 
 
         for(i in 1:10000) {
@@ -47,6 +48,8 @@ for (j in 1:Prod_len) {
 
         Bootstrap$Product[j] <- Prod[j]
         Bootstrap$n[j] <- N
+        Bootstrap$Units[j] <- units_A
+        Bootstrap$level[j] <- level_A
         Bootstrap$MU[j] <- mean_bs
         Bootstrap$Lower[j] <- Lower_bs
         Bootstrap$Upper[j] <- Upper_bs
@@ -54,11 +57,3 @@ for (j in 1:Prod_len) {
 
 Bootstrap
 write.csv(Bootstrap, "MU_by_Bootstrap.csv", row.names = FALSE)
-#-------------------------------------------------------------------------
-
-bs2 <- as.data.frame(bs)
-plotbs <- ggplot(bs2, aes(x=bs)) +
-        geom_histogram(binwidth = 0.02, colour = "darkgreen", fill = "beige") +
-        geom_vline(xintercept = Upper_bs, lty = 2, color = "red") +
-        geom_vline(xintercept = Lower_bs, lty = 2, color = "red")
-plotbs
