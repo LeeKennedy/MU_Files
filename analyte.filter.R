@@ -4,7 +4,7 @@ library (dplyr)
 
 
 
-lims <- read.csv("NITF02.csv", as.is=TRUE, header=TRUE)
+lims <- read.csv("CFOS_Lactose_071215.csv", as.is=TRUE, header=TRUE)
 
 
 colnames(lims)[1] <- "SAMPLE_NUMBER"

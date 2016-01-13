@@ -8,7 +8,7 @@
 
 colnames(lims)[1] <- 'SAMPLE_NUMBER'
 
-units <- lims$REPORTED_UNITS[1]
+units <- lims$UNITS[1]
 hv <- 2
 
 #Export file -----------------------------------------------------------------------------
