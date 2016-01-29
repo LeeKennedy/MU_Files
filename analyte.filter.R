@@ -4,7 +4,7 @@ library (dplyr)
 
 
 
-lims <- read.csv("CFOS_Lactose_071215.csv", as.is=TRUE, header=TRUE)
+lims <- read.csv("MOIS08.csv", as.is=TRUE, header=TRUE)
 
 
 colnames(lims)[1] <- "SAMPLE_NUMBER"
@@ -18,20 +18,22 @@ unique(lims$ANALYSIS)
 
 #-----------------
 
+lims <- lims %>%
+        filter(grepl("Moisture",REPORTED_NAME))
+
+
+lims$REPORTED_NAME <- "Vitamin B6 (Pyridoxine)"
+#-------------------
+
+
 lims$REPORTED_NAME <- "Vitamin B2"
 
 lims <- lims %>%
-
-        filter(REPORTED_UNITS == "PCT_M-V")
-
-
-        filter(PRODUCT_GRADE == "EAP00701" |
-                       PRODUCT_GRADE == "EAP00702" |
-                       PRODUCT_GRADE == "EAP00703" |
-                       PRODUCT_GRADE == "EAP00700" |
-                       PRODUCT_GRADE == "EAP00717")
+        filter(UNITS == "MG_P_L")
 
 
-lims <- lims %>%
-        #filter(grepl("6.38",REPORTED_NAME)
-        filter(REPORTED_NAME == "Total Solids")
+filter(PRODUCT_GRADE == "EAP00701" |
+               PRODUCT_GRADE == "EAP00702" |
+               PRODUCT_GRADE == "EAP00703" |
+               PRODUCT_GRADE == "EAP00700" |
+               PRODUCT_GRADE == "EAP00717")

@@ -1,7 +1,7 @@
 library(dplyr)
 library(ggplot2)
 
-data1 <- read.csv("bootstrap_LACT010493.csv", header = TRUE, as.is = TRUE)
+data1 <- read.csv(paste("bootstrap_",file.name, ".csv", sep=""), header = TRUE, as.is = TRUE)
 
 # Functions --------------------------------------------------------------
 MU <- function (x) {
@@ -56,4 +56,4 @@ for (j in 1:Prod_len) {
 }
 
 Bootstrap
-write.csv(Bootstrap, "MU_by_Bootstrap.csv", row.names = FALSE)
+write.csv(Bootstrap, paste(file.name,"_Bootstrap_MU.csv", sep=""), row.names = FALSE)
