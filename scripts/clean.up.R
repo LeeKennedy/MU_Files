@@ -3,7 +3,7 @@ rm(list=ls())
 library (dplyr)
 
 
-lims <- read.csv("FATS01.csv", as.is=TRUE, header=TRUE)
+lims <- read.csv("SOLT01.csv", as.is=TRUE, header=TRUE)
 
 summary_data <- function(x) {
 colnames(x)[1] <- "SAMPLE_NUMBER"
@@ -32,4 +32,6 @@ print(units_2)
 
 summary_data(lims)
 
-
+#---selection---------------------------------------------------------
+lims <- lims %>%
+        filter(UNITS == "MG_P_L")
