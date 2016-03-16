@@ -3,7 +3,7 @@ library(xlsx) #load the package
 
 df <- read.csv(paste(file.name, ".csv", sep=""), header = TRUE, as.is = TRUE)
 
-df2 <- loadWorkbook("/Users/Study Old/Desktop/TITA/CODExx-analyte-Filterable.xlsx") 
+df2 <- loadWorkbook("/Users/Study Old/Desktop/VITB/CODExx-analyte-Filterable.xlsx") 
 
 df_s <- getSheets(df2)
 
