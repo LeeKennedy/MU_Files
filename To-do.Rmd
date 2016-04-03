@@ -1,0 +1,18 @@
+---
+title: "Things.to.do"
+author: "Lee Kennedy"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: html_document
+---
+
+## Things to do:
+
+* 
+
+
+----------------------------------
+## Things Done:
+
+Date       |  Item
+-----------|------------------------
+01/04/2016 | Tidied up and started **Read.Me**
