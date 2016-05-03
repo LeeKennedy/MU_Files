@@ -3,7 +3,7 @@ rm(list=ls())
 library (dplyr)
 
 
-lims <- read.csv("VITP04_D.csv", as.is=TRUE, header=TRUE)
+lims <- read.csv("SUGA04.csv", as.is=TRUE, header=TRUE)
 
 summary_data <- function(x) {
 colnames(x)[1] <- "SAMPLE_NUMBER"
@@ -37,4 +37,7 @@ lims <- lims %>%
         filter(UNITS == "MG_P_L")
 
 lims <- lims %>%
-        filter(REPORTED_NAME == "Protein (TN x 6.38)")
+        filter(ANALYSIS == "SUGA040493")
+
+lims <- lims %>%
+        filter(REPORTED_NAME == "Glucose")
