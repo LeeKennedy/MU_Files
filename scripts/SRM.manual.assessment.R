@@ -4,19 +4,19 @@ library(psych)
 library(ggplot2)
 library(readxl)
 
-data.raw <- read.csv("SRM11E.csv", as.is=TRUE, header=TRUE)
+data.raw <- read.csv("VITE04_SRM.csv", as.is=TRUE, header=TRUE)
 #data.raw <- read_excel("CHLN.xlsx", sheet = 1)
 
 colnames(data.raw)[1] <- "SAMPLE_NUMBER"
 
 
 data.raw <- data.raw %>%
-        filter(SAMPLING_POINT == "SRM11E")
+        filter(SAMPLING_POINT == "IRM001A")
 
 # Input parameters ----------------------------------------------------------------
 
-max.pts <- 200 # Maximum points plotted
-points <- 50   # How many points used to set control lines
+max.pts <- 100 # Maximum points plotted
+points <- 20   # How many points used to set control lines
 
 # ---------------------------------------------------------------------------------
 
@@ -164,13 +164,18 @@ plot_new
 hist(data.in3$outliers, 
      breaks=20, 
      xlab=srm,
-     main = paste("Control Chart",srm,"data distribution"))
-abline(v = Centre, col = "red", lty = 2)
+     main = paste("Control Chart",srm,"data distribution"),
+     col = "burlywood1")
+#abline(v = Centre, col = "red", lty = 2)
 
 print(describe(data.in3$outliers))
 print (Clines)
 
-xx <- boxplot(data.in3$A~data.in3$Operator, las=2, cex.axis = 0.8)
+xx <- boxplot(data.in3$A~data.in3$Operator, 
+              las=2, 
+              cex.axis = 0.8,
+              main = "Operators - VITE04",
+              ylab = "mg/100g")
 abline(h=Centre, col = "blue", lty=2, lwd=2)
 mytable <- xx$stats
 colnames(mytable)<-xx$names
