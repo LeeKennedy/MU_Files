@@ -3,7 +3,7 @@
 
 # Import File -----------------------------------------------------------------------------
 #lims <- read.csv("ASHS04.csv", as.is=TRUE, header = TRUE)
-#colnames(lims)[1] <- 'SAMPLE_NUMBER'
+colnames(lims)[1] <- 'SAMPLE_NUMBER'
 
 # Dependent Libraries ---------------------------------------------------------------------
 library(dplyr)

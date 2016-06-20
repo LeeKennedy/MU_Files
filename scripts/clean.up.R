@@ -3,7 +3,7 @@ rm(list=ls())
 library (dplyr)
 
 
-lims <- read.csv("VITP04.csv", as.is=TRUE, header=TRUE)
+lims <- read.csv("ASHS11.csv", as.is=TRUE, header=TRUE)
 
 summary_data <- function(x) {
 colnames(x)[1] <- "SAMPLE_NUMBER"
@@ -40,6 +40,6 @@ lims <- lims %>%
         filter(ANALYSIS == "SUGA040493")
 
 lims <- lims %>%
-        filter(REPORTED_NAME == "Vitamin D [m/m IU]")
+        filter(REPORTED_NAME == "Caffeine")
 
 lims$REPORTED_NAME <- "Vitamin D"
