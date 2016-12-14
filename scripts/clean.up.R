@@ -3,7 +3,7 @@ rm(list=ls())
 library (dplyr)
 
 
-lims <- read.csv("Benzoic.csv", as.is=TRUE, header=TRUE)
+lims <- read.csv("INSI01.csv", as.is=TRUE, header=TRUE)
 
 summary_data <- function(x) {
 colnames(x)[1] <- "SAMPLE_NUMBER"
@@ -32,14 +32,19 @@ print(units_2)
 
 summary_data(lims)
 
-#---selection---------------------------------------------------------
+#---Duplicates---------------------------------------------------------
+
+table(lims$ANALYSIS)
+table(lims$UNITS)
+
+# Selection -----------------------------------------------------------
 lims <- lims %>%
-        filter(UNITS == "MG_P_L")
+        filter(UNITS == "UEQ_P_ML")
 
 lims <- lims %>%
-        filter(ANALYSIS == "SUGA040493")
+        filter(ANALYSIS == "PROT010201")
 
 lims <- lims %>%
-        filter(REPORTED_NAME == "Caffeine")
+        filter(REPORTED_NAME == "Glucose")
 
 lims$REPORTED_NAME <- "Benzoic Acid"
