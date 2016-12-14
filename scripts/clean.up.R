@@ -1,10 +1,11 @@
-# Clear Environment ---------------------------------------------
+# Clear Environment ---------------------------------------------------
 rm(list=ls())
+
+# Packages ------------------------------------------------------------
 library (dplyr)
 
 
-lims <- read.csv("Benzoic.csv", as.is=TRUE, header=TRUE)
-
+# Functions -----------------------------------------------------------
 summary_data <- function(x) {
 colnames(x)[1] <- "SAMPLE_NUMBER"
 
@@ -15,7 +16,6 @@ if (testcodes > 1) {
         stop()
 }
 #----------------------------------------------------------------------
-
 
 reported_names <- unique(x$REPORTED_NAME)
 names <- as.data.frame(reported_names)
@@ -30,16 +30,8 @@ print(units_2)
 
 }
 
+# Program -------------------------------------------------------------
+
+lims <- read.csv("VITE05.csv", as.is=TRUE, header=TRUE)
 summary_data(lims)
 
-#---selection---------------------------------------------------------
-lims <- lims %>%
-        filter(UNITS == "MG_P_L")
-
-lims <- lims %>%
-        filter(ANALYSIS == "SUGA040493")
-
-lims <- lims %>%
-        filter(REPORTED_NAME == "Caffeine")
-
-lims$REPORTED_NAME <- "Benzoic Acid"
