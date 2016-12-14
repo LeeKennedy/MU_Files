@@ -55,3 +55,5 @@ ggplot(DF, aes(x=V1, fill=dataset)) +
   geom_histogram(binwidth=binsz, colour="black", position="identity") +
   scale_fill_manual(breaks=1:2, values=c("lightgoldenrod1","grey"))
 
+# Normality check ------------------------------------------------------
+shapiro.test(DF$V1)
