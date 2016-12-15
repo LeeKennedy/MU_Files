@@ -14,3 +14,7 @@ lims <- lims %>%
 
 # Change Reported Name ----------------------------------------------------
 lims$REPORTED_NAME <- "dl-alpha-Tocopherol"
+
+# Select customer----------------------------------------------------------
+lims <- select(lims, everything())%>%
+        filter(CUSTOMER=="MG60")

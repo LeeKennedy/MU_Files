@@ -1,17 +1,11 @@
 
 
-
-# Import File -----------------------------------------------------------------------------
-#lims <- read.csv("ASHS04.csv", as.is=TRUE, header = TRUE)
+# Tidy Column 1 if not already done -------------------------------------------------------
 colnames(lims)[1] <- 'SAMPLE_NUMBER'
 
-# Dependent Libraries ---------------------------------------------------------------------
+# Packages ---------------------------------------------------------------------
 library(dplyr)
 
-
-# Optional filtering step to selct customer------------------------------------------------
-#lims <- select(lims, everything())%>%
-#      filter(CUSTOMER=="MG60")
 
 #Converts all units to g/100g--------------------------------------------------------------
 units <- "G_P_100G"
