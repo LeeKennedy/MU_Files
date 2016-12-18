@@ -293,69 +293,7 @@ if(f1_flag == 0) {
 
 write.csv(f1, file= paste("bootstrap_",file.name,".csv", sep=""), row.names=FALSE)
 
-# Summarising data ---------------------------------------------------------------------------
-b4 <- f1 %>%
-        group_by(Product) %>%
-        summarise(b1 = length(A),
-                  b2 = mean(A),
-                  b3c = stdd(f5))
-
-b4$Type <- "Interim Precision"
-b4$Products <- row.names(b4)
-b4$Analyte <- f0$Name[1]
-b4$Conc <- ""
-b4$Method <- substr(f0$Analysis[1],1,6)
-b4$Unit <- f0$Unit[1]
-b4$Source <- "Replicates"
-
-b4 <- b4[,c(1,7:10,5,11,3,2,4)]
-
-colnames(b4)[1:10] <- c('Matrix','Analyte','Conc','Method','Unit','Type','Source','Mean', 'n', 'sd')
-b5 <- b4[b4$n>6,]
-
-b6 <- ifelse(f4=="NA", "Yes", "No")
-
-
-ff2 <- subset(f0, Type=="Repeatability")
-f2 <- ff2
-
-
-f2 <- mutate(f2, diff = (B-A), sqr = diff^2)
-
-cf3 <- split(f2$diff, f2$Product)
-cf4 <- lapply(cf3, remove.outliers)
-cf4a <- lapply(cf4, remove.outliers)
-cf5 <- unsplit(cf4a, f2$Product)
-
-cf2a <- cbind(f2,cf5)
-f2 <- na.omit(cf2a)
-
-rd=2
-
-cb4 <- f2 %>%
-        group_by(Product) %>%
-        summarise(b1 = length(A),
-                  b2 = mean(A),
-                  b3c = stdd(cf5))
-
-cb4$Type <- "Repeatability"
-cb4$Products <- row.names(cb4)
-cb4$Analyte <- f0$Name[1]
-cb4$Conc <- ""
-cb4$Method <- substr(f0$Analysis[1],1,6)
-cb4$Unit <- f0$Unit[1]
-cb4$Source <- "Duplicates"
-
-cb4 <- cb4[,c(1,7:10,5,11,3,2,4)]
-
-colnames(cb4)[1:10] <- c('Matrix','Analyte','Conc','Method','Unit','Type','Source','Mean', 'n', 'sd')
-cb5 <- cb4[cb4$n>6,]
-
-db4 <- rbind(b5,cb5)
-db4 <- db4[,c(1,2,4:10)]
-
-# Export Product precision data --------------------------------------------------------------
-write.csv(db4, file = "Products.csv", row.names = TRUE)
+##################### Chunk removed
 
 # SRM interrogation --------------------------------------------------------------------------
 data.in4 <- read.csv("srmdata.csv", as.is=TRUE, header=TRUE)

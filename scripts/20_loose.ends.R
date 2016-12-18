@@ -10,7 +10,7 @@ lims <- lims %>%
 
 # Filter on Reported Name -------------------------------------------------
 lims <- lims %>%
-        filter(REPORTED_NAME == "Caffeine")
+        filter(REPORTED_NAME == "Ash @ 550°C")
 
 # Change Reported Name ----------------------------------------------------
 lims$REPORTED_NAME <- "dl-alpha-Tocopherol"
