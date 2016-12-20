@@ -3,7 +3,12 @@ library(xlsx) #load the package
 
 df <- read.csv(paste(file.name, ".csv", sep=""), header = TRUE, as.is = TRUE)
 
-df2 <- loadWorkbook("~/Documents/GitHub/MU_Files/data/CODExx-analyte-Filterable.xlsx") 
+
+if((Sys.info()[1] == "Windows") == TRUE) {
+        df2 <- loadWorkbook("H:/GitHub Projects/MU_Files/data/CODExx-analyte-Filterable.xlsx")
+} else{
+        df2 <- loadWorkbook("~/Documents/GitHub/MU_Files/data/CODExx-analyte-Filterable.xlsx") 
+}
 
 df_s <- getSheets(df2)
 

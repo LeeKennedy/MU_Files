@@ -1,10 +1,12 @@
-# Clear Environment ---------------------------------------------
+# Clear Environment ---------------------------------------------------
 rm(list=ls())
+
+# packages ------------------------------------------------------------
 library (dplyr)
 library(readr)
 
 
-lims <- read.csv("INSI01.csv", as.is=TRUE, header=TRUE)
+# Function ------------------------------------------------------------
 
 summary_data <- function(x) {
 colnames(x)[1] <- "SAMPLE_NUMBER"
@@ -33,6 +35,6 @@ print(units_2)
 
 # Program -------------------------------------------------------------
 
-lims <- read_csv("~/Documents/GitHub/MU_Files/data/IF.csv")
+lims <- read_csv("Tyramine.csv")
 
 summary_data(lims)
