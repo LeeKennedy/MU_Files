@@ -1,12 +1,11 @@
-# Clear Environment ---------------------------------------------------
+# Clear Environment ---------------------------------------------
 rm(list=ls())
-
-# Packages ------------------------------------------------------------
 library (dplyr)
 library(readr)
 
 
-# Functions -----------------------------------------------------------
+lims <- read.csv("INSI01.csv", as.is=TRUE, header=TRUE)
+
 summary_data <- function(x) {
 colnames(x)[1] <- "SAMPLE_NUMBER"
 
@@ -17,6 +16,7 @@ if (testcodes > 1) {
         stop()
 }
 #----------------------------------------------------------------------
+
 
 reported_names <- unique(x$REPORTED_NAME)
 names <- as.data.frame(reported_names)
@@ -31,8 +31,27 @@ print(units_2)
 
 }
 
+<<<<<<< HEAD:scripts/10_clean.up.R
 # Program -------------------------------------------------------------
 
 lims <- read_csv("~/Documents/GitHub/MU_Files/data/ASHS04.csv")
+=======
+>>>>>>> origin/master:scripts/clean.up.R
 summary_data(lims)
 
+#---Duplicates---------------------------------------------------------
+
+table(lims$ANALYSIS)
+table(lims$UNITS)
+
+# Selection -----------------------------------------------------------
+lims <- lims %>%
+        filter(UNITS == "UEQ_P_ML")
+
+lims <- lims %>%
+        filter(ANALYSIS == "PROT010201")
+
+lims <- lims %>%
+        filter(REPORTED_NAME == "Glucose")
+
+lims$REPORTED_NAME <- "Benzoic Acid"
