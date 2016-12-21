@@ -35,6 +35,6 @@ print(units_2)
 
 # Program -------------------------------------------------------------
 
-lims <- read_csv("MICP06.csv")
+lims <- read_csv("Magnesium.csv")
 
 summary_data(lims)

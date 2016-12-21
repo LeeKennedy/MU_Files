@@ -7,6 +7,13 @@ library(psych)
 
 
 data.in <- read.csv("clean.units.csv", as.is=TRUE, header=TRUE)
+
+nc <- ncol(data.in)
+
+if(nc == 19) {
+        data.in <- data.in[,-1]
+}
+colnames(data.in)[1] <- "SAMPLE_NUMBER"
 colnames(data.in)[8] <- "UNITS"
 
 # Round 'start time' to the nearest hour to help define duplicates and replicates.------------
