@@ -6,14 +6,14 @@ lims <- lims %>%
 
 # Filter on Analysis ------------------------------------------------------
 lims <- lims %>%
-        filter(ANALYSIS == "SUGA040493")
+        filter(ANALYSIS == "VITD050115")
 
 # Filter on Reported Name -------------------------------------------------
 lims <- lims %>%
-        filter(REPORTED_NAME == "Ash @ 550°C")
+        filter(REPORTED_NAME == "Vitamin D3")
 
 # Change Reported Name ----------------------------------------------------
-lims$REPORTED_NAME <- "dl-alpha-Tocopherol"
+lims$REPORTED_NAME <- "Vitamin D3"
 
 # Select customer----------------------------------------------------------
 lims <- select(lims, everything())%>%

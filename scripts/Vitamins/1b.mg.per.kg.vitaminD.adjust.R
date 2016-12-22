@@ -1,10 +1,9 @@
-### CHANGE ###: file name 
-#lims <- read.csv("VITD01-Vitamin D.csv", as.is=TRUE,header = TRUE)
 
 colnames(lims)[1] <- 'SAMPLE_NUMBER'
 
 #Converts all units to mg/kg
 units <- "MG_P_KG"
+hv <- 6
 
 unit <- which((lims$UNITS=="G_P_100G"))
 lims$UNITS[unit] <- "MG_P_KG"

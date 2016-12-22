@@ -35,6 +35,7 @@ print(units_2)
 
 # Program -------------------------------------------------------------
 
-lims <- read_csv("Magnesium.csv")
+lims <- read_csv("Zinc.csv")
 
 summary_data(lims)
+table(lims$REPORTED_NAME)
