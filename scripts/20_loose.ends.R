@@ -10,10 +10,14 @@ lims <- lims %>%
 
 # Filter on Reported Name -------------------------------------------------
 lims <- lims %>%
-        filter(REPORTED_NAME == "Vitamin D3")
+        filter(REPORTED_NAME == "Vit E (as dl-alpha-Tocopherol)")
+
+# Filter on Two Reported Names -------------------------------------------------
+lims <- lims %>%
+        filter(REPORTED_NAME == "dl-alpha-Tocopherol" | REPORTED_NAME == "Vit E (as dl-alpha-Tocopherol)")
 
 # Change Reported Name ----------------------------------------------------
-lims$REPORTED_NAME <- "Vitamin D3"
+lims$REPORTED_NAME <- "Vitamin E"
 
 # Select customer----------------------------------------------------------
 lims <- select(lims, everything())%>%

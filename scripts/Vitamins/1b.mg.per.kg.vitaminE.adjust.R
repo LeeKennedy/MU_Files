@@ -1,5 +1,3 @@
-### CHANGE ###: file name 
-#lims <- read.csv("VITE05-Vitamin_E.csv", as.is=TRUE,header = TRUE)
 
 colnames(lims)[1] <- 'SAMPLE_NUMBER'
 

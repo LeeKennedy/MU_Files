@@ -35,7 +35,7 @@ print(units_2)
 
 # Program -------------------------------------------------------------
 
-lims <- read_csv("Zinc.csv")
+lims <- read_csv("VITB_B6.csv")
 
 summary_data(lims)
 table(lims$REPORTED_NAME)
