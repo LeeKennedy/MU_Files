@@ -2,22 +2,22 @@
 
 # Filter on Units ---------------------------------------------------------
 lims <- lims %>%
-        filter(UNITS == "MG_P_L")
+        filter(UNITS == "MEQ_CAC3_L")
 
 # Filter on Analysis ------------------------------------------------------
 lims <- lims %>%
-        filter(ANALYSIS == "VITD050115")
+        filter(ANALYSIS == "PHOS020495")
 
 # Filter on Reported Name -------------------------------------------------
 lims <- lims %>%
-        filter(REPORTED_NAME == "Vitamin A")
+        filter(REPORTED_NAME == "Silica (Total)")
 
 # Filter on Two Reported Names -------------------------------------------------
 lims <- lims %>%
-        filter(REPORTED_NAME == "dl-alpha-Tocopherol" | REPORTED_NAME == "Vit E (as dl-alpha-Tocopherol)")
+        filter(REPORTED_NAME == "BOD" | REPORTED_NAME == "BOD @ 19 - 21°C")
 
 # Change Reported Name ----------------------------------------------------
-lims$REPORTED_NAME <- "Vitamin E"
+lims$REPORTED_NAME <- "Total Suspended Solids"
 
 # Select customer----------------------------------------------------------
 lims <- select(lims, everything())%>%
