@@ -20,6 +20,10 @@ unit <- which((lims$UNITS=="UG_P_100G"))
 lims$UNITS[unit] <- "MG_P_KG"
 lims$ENTRY[unit] <- as.numeric(lims$ENTRY[unit]) * 0.01
 
+unit <- which((lims$UNITS=="UG_P_KG"))
+lims$UNITS[unit] <- "MG_P_KG"
+lims$ENTRY[unit] <- as.numeric(lims$ENTRY[unit]) * 0.001
+
 unit <- which((lims$UNITS=="MG_P_G"))
 lims$UNITS[unit] <- "MG_P_KG"
 lims$ENTRY[unit] <- as.numeric(lims$ENTRY[unit]) * 1000
