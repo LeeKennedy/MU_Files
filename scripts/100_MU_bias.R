@@ -8,11 +8,13 @@ library(dts.quality)
 
 # Data Input -------------------------------------------------------------
 
-bias <- read_excel("~/Desktop/Bias Data Compilation.xlsx", 
-                   col_types = c("text", "text", "date", 
-                                 "text", "text", "text", "text", "numeric", 
-                                 "numeric", "numeric", "numeric", "numeric", 
-                                 "numeric", "numeric", "text"))
+bias <- read_excel("W:/Quality Documents Controlled - General Access/Chemistry/MU/Bias Data Compilation.xlsx", 
+           col_types = c("text", "text", "date", 
+                         "text", "text", "text", "text", "numeric", 
+                         "numeric", "numeric", "numeric", 
+                         "numeric", "numeric", "numeric", 
+                         "numeric", "numeric", "text"))
+
 bias <- bias[-c(1:9),1:14]
 
 colnames(bias) <- c("Type", "Reference", "Date", "Test_Code", "Analyte", "Unit", "Matrix","Reference_Mean", "sd","no","Lab_Result","pct_sd", "Bias", "pct_Bias")

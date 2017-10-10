@@ -10,14 +10,14 @@ lims <- lims %>%
 
 # Filter on Reported Name -------------------------------------------------
 lims <- lims %>%
-        filter(REPORTED_NAME == "Silica (Total)")
+        filter(REPORTED_NAME == "Starch")
 
 # Filter on Two Reported Names -------------------------------------------------
 lims <- lims %>%
         filter(REPORTED_NAME == "BOD" | REPORTED_NAME == "BOD @ 19 - 21°C")
 
 # Change Reported Name ----------------------------------------------------
-lims$REPORTED_NAME <- "Total Suspended Solids"
+lims$REPORTED_NAME <- "Dispersibility"
 
 # Select customer----------------------------------------------------------
 lims <- select(lims, everything())%>%
