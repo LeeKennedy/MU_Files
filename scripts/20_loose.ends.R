@@ -10,7 +10,7 @@ lims <- lims %>%
 
 # Filter on Reported Name -------------------------------------------------
 lims <- lims %>%
-        filter(REPORTED_NAME == "Peroxide Value")
+        filter(REPORTED_NAME == "Salt")
 
 # Filter on Two Reported Names -------------------------------------------------
 lims <- lims %>%
@@ -23,7 +23,7 @@ lims$REPORTED_NAME <- "Vitamin C"
 lims <- select(lims, everything())%>%
         filter(CUSTOMER=="MG60")
 
-
+lims$REPORTED_NAME[lims$REPORTED_NAME == "Sodium Chloride"] <- "Salt"
 
 
 
