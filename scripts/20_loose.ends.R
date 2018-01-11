@@ -23,11 +23,7 @@ lims$REPORTED_NAME <- "Vitamin C"
 lims <- select(lims, everything())%>%
         filter(CUSTOMER=="MG60")
 
-# Change Chloride to Salt ----------------------------------------------------
 
-lims$ENTRY[lims$REPORTED_NAME == "Chloride"] <- lims$ENTRY*58.5/35.5
-lims$REPORTED_NAME[lims$REPORTED_NAME == "Chloride"] <- "Salt"
-lims$REPORTED_NAME[lims$REPORTED_NAME == "Sodium Chloride"] <- "Salt"
 
 
 
