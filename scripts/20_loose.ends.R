@@ -10,7 +10,7 @@ lims <- lims %>%
 
 # Filter on Reported Name -------------------------------------------------
 lims <- lims %>%
-        filter(REPORTED_NAME == "Salt")
+        filter(REPORTED_NAME == "Moisture")
 
 # Filter on Two Reported Names -------------------------------------------------
 lims <- lims %>%
