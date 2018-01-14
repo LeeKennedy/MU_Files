@@ -38,7 +38,7 @@ print(units_2)
 lims <- read_csv("ICPM01.csv")
 
 lims <- lims %>%
-       filter(REPORTED_NAME == "Copper")
+       filter(REPORTED_NAME == "Tin")
 
 summary_data(lims)
 table(lims$REPORTED_NAME)
