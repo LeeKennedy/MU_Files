@@ -14,7 +14,7 @@ lims <- lims %>%
 
 # Filter on Two Reported Names -------------------------------------------------
 lims <- lims %>%
-        filter(REPORTED_NAME == "BOD" | REPORTED_NAME == "BOD @ 19 - 21°C")
+        filter(REPORTED_NAME == "Riboflavin" | REPORTED_NAME == "Vitamin B2")
 
 # Change Reported Name ----------------------------------------------------
 lims$REPORTED_NAME <- "Vitamin C"
