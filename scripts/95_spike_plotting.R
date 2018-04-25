@@ -55,9 +55,15 @@ data1 <- data %>%
 
 plot_ba <- ggplot(data1, aes(x=ENTRY)) +
         geom_histogram(binwidth=2, col="darkgreen", fill="cornflowerblue") +
+        labs(title = "Spike Recovery\n", x = "Percent Recovery", y = "Occurances")+
+        scale_y_continuous(breaks=seq(0, 13, 1)) +
         theme_bw() + theme(panel.grid.major = element_line(size = 0.5, color = "grey"), 
         axis.line = element_line(size = 0.7, color = "black"), 
         text = element_text(size = 14))
 plot_ba
 
+ggsave("Spikes.png", width = 10, height = 6, dpi = 100)
+
 describe(data1$ENTRY)
+
+shapiro.test(data1$ENTRY)
