@@ -52,7 +52,7 @@ colnames(bias) <- c("Type", "Reference", "Date", "Test_Code", "Analyte", "Unit",
 
 bias$year <- year(bias$Date)
 bias <- bias %>%
-        filter(year == 2018)
+        filter(year > 2017)
 bias <- bias[,-15]
 
 
@@ -71,4 +71,4 @@ summary_bias <- summary_bias[,c(1,2,3,4,6,8)]
 
 summary_bias
 
-write.csv(summary_bias, "MU_Bias_Summary2.csv")
+#write.csv(summary_bias, "MU_Bias_Summary2.csv")
