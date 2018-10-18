@@ -2,7 +2,7 @@
 
 # Filter on Units ---------------------------------------------------------
 lims <- lims %>%
-        filter(UNITS == "MEQ_CAC3_L")
+        filter(UNITS == "G_P_100ML")
 
 # Filter on Analysis ------------------------------------------------------
 lims <- lims %>%
@@ -10,7 +10,7 @@ lims <- lims %>%
 
 # Filter on Reported Name -------------------------------------------------
 lims <- lims %>%
-        filter(REPORTED_NAME == "Folic Acid")
+        filter(REPORTED_NAME == "Vitamin A")
 
 # Filter on Two Reported Names -------------------------------------------------
 lims <- lims %>%
