@@ -25,6 +25,10 @@ lims <- select(lims, everything())%>%
 
 lims$REPORTED_NAME[lims$REPORTED_NAME == "Sodium Chloride"] <- "Salt"
 
+# Filter on Result Range -------------------------------------------------
+lims <- lims %>%
+        filter(between(ENTRY, 3,4))
+
 
 
 
