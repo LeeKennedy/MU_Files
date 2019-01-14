@@ -14,7 +14,7 @@ lims <- lims %>%
 
 # Filter on Two Reported Names -------------------------------------------------
 lims <- lims %>%
-        filter(REPORTED_NAME == "Riboflavin" | REPORTED_NAME == "Vitamin B2")
+        filter(REPORTED_NAME == "Pantothenic Acid" | REPORTED_NAME == "Pantothenic Acid [m/m]")
 
 # Change Reported Name ----------------------------------------------------
 lims$REPORTED_NAME <- "Vitamin C"
