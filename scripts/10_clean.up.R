@@ -35,11 +35,8 @@ print(units_2)
 
 # Program -------------------------------------------------------------
 
-<<<<<<< HEAD
-lims <- read_csv("VIB501.csv")
-=======
-lims <- read_csv("BIOA01.csv")
->>>>>>> d747be15d80acc7f5ab76fe4ee1077094f907a59
+lims <- read_csv("CARN01.csv")
+
 
 
 

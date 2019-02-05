@@ -10,7 +10,7 @@ lims <- lims %>%
 
 # Filter on Reported Name -------------------------------------------------
 lims <- lims %>%
-        filter(REPORTED_NAME == "Tyramine")
+        filter(REPORTED_NAME == "L-Carnitine")
 
 # Filter on Two Reported Names -------------------------------------------------
 lims <- lims %>%
