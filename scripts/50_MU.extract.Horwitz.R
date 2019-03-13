@@ -33,7 +33,7 @@ data.in$DATE_STARTED <- date.temp2
 # sort, remove odd units, remove negative numbers,remove NAs----------------------------------
 data.in3 <- select(data.in, everything())%>%
         arrange(SAMPLE_NUMBER)%>%
-        filter(UNITS %in% units, ENTRY>0)%>%
+        #filter(UNITS %in% units, ENTRY>0)%>%
         mutate(ENTRY = as.numeric(as.character(ENTRY)))
         
 
