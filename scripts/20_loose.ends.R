@@ -16,6 +16,14 @@ lims <- lims %>%
 lims <- lims %>%
         filter(REPORTED_NAME == "Pantothenic Acid" | REPORTED_NAME == "Pantothenic Acid [m/m]")
 
+
+# Filter on Two Reported Names [m/m] ---------------------------------------------
+
+analyte <- "Fat"
+lims <- lims %>%
+        filter(REPORTED_NAME == analyte | REPORTED_NAME == paste(analyte, "[m/m]", sep = " "))
+lims$REPORTED_NAME <- analyte
+
 # Change Reported Name ----------------------------------------------------
 lims$REPORTED_NAME <- "Iodine"
 
