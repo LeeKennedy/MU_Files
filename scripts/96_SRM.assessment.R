@@ -1,11 +1,11 @@
 #### Clean Up environment -----------------------------
-rm(list=ls())
+#rm(list=ls())
 
 ### ---------------------------------------------------
 library(tidyverse)
 library(readxl)
 library(psych)
-library(here)
+
 
 
 ## Functions -------------------
@@ -37,16 +37,16 @@ return(zz)
 }
 
 ### Data Input -------------------------------------------------------------------
-here()
-data.raw <- read_excel("data/PHOS01.xlsx", col_types = c("numeric", 
-                                                       "date", "text", "text", "text", "text", 
-                                                       "text", "numeric", "text", "text"))
 
+data.raw <- read_excel("SALT07_Ops.xlsx", 
+                       col_types = c("numeric", "date", "text", 
+                                     "text", "text", "text", "text", "numeric", 
+                                     "text", "text"))
 
 # Input parameters ----------------------------------------------------------------
 
-max.pts <- 50 # Maximum points plotted
-points <- 50   # How many points used to set control lines
+max.pts <- 114 # Maximum points plotted
+points <- 20   # How many points used to set control lines
 
 # ---------------------------------------------------------------------------------
 
@@ -55,10 +55,13 @@ testname <- substr(data.raw$ANALYSIS[1],1,6)
 Name <- data.raw$REPORTED_NAME[1]
 Units <- tolower(sub("_P_","/",(data.raw$UNITS[1])))
 
+# isolate batch type.
+# data.raw <- data.raw %>% filter(grepl("SALTP-19", NAME ))
+
 # Clean the data
 data.in <- select(data.raw, everything())%>%
         arrange(SAMPLE_NUMBER)%>%
-        filter(SAMPLE_NUMBER > 4000000)%>%
+        #filter(SAMPLE_NUMBER > 4000000)%>%
         select(ASSIGNED_OPERATOR, SAMPLING_POINT, ENTRY)%>%
         mutate(ENTRY = as.numeric(as.character(ENTRY)))%>%
         na.omit
@@ -73,7 +76,7 @@ j <- length(unique(data.in$SAMPLING_POINT))
 
 srm1 <- unique(data.in[2])
 
-srm <- srm1[j,]
+srm <- as.character(srm1[j,])
 
 data.in3 <- data.in[data.in$SAMPLING_POINT==srm,]
 names(data.in3) <- c("Operator", "SRM","A")
@@ -183,7 +186,7 @@ plot_new <- ggplot(data_new, aes(x=row_n, y=A)) +
         scale_y_continuous(limits = c(0.97*LCL, 1.03*UCL)) +
         annotate("text", x = points+2, y = 1.02*UCL, label = "Control Limits Data") 
 plot_new
-ggsave(file.path('graphs', paste(testname,'_', srm,'_Control_Chart.png')), width = 8, height = 5, dpi=200)
+ggsave(paste(testname,'_', srm,'_Control_Chart.png'), width = 12, height = 6, dpi=100)
 
 # Histogram of control chart ---------------------------------------------
 hist(data.in3$outliers, 
