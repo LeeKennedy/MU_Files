@@ -2,8 +2,8 @@
 rm(list=ls())
 
 # packages ------------------------------------------------------------
-library (dplyr)
-library(readr)
+library (tidyverse)
+library(LK.Toolbox)
 
 
 # Function ------------------------------------------------------------
@@ -35,10 +35,8 @@ print(units_2)
 
 # Program -------------------------------------------------------------
 
-lims <- read_csv("FATS01.csv")
-
-
-
+lims <- read_csv("PROT01.csv")
+lims <- strip_mm(lims)
 
 summary_data(lims)
 table(lims$REPORTED_NAME)
