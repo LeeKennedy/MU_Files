@@ -25,7 +25,7 @@ lims <- lims %>%
 lims$REPORTED_NAME <- analyte
 
 # Change Reported Name ----------------------------------------------------
-lims$REPORTED_NAME <- "Iodine"
+lims$REPORTED_NAME <- "pH"
 
 # Select customer----------------------------------------------------------
 lims <- select(lims, everything())%>%
