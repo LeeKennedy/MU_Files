@@ -35,7 +35,7 @@ print(units_2)
 
 # Program -------------------------------------------------------------
 
-lims <- read_csv("liq_milk.csv")
+lims <- read_csv("FATS03.csv")
 lims <- strip_mm(lims)
 
 summary_data(lims)
