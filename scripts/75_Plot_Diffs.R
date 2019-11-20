@@ -1,0 +1,43 @@
+
+### Import data -----------------------
+
+plot_data <- read.csv(paste(file.name, ".csv", sep=""), header = TRUE, as.is = TRUE)
+
+plot_data$Diff <- plot_data$B-plot_data$A
+
+plot_data <- plot_data[,c(4,10,13)]
+
+prod_list <- unique(plot_data$Product)
+
+plot_data_R <- plot_data %>% 
+        filter(Product == prod_list[1]) %>% 
+        filter(Type == "Interim Precision") %>% 
+        mutate(Diff = outliers(Diff)) %>% 
+        na.omit() %>% 
+        arrange(Diff)
+plot_data_R$row_n <- as.numeric(rownames(plot_data_R))
+
+
+plot_data_r <- plot_data %>% 
+        filter(Product == prod_list[1]) %>% 
+        filter(Type == "Repeatability") %>% 
+        mutate(Diff = outliers(Diff)) %>% 
+        na.omit() %>% 
+        arrange(Diff)
+plot_data_r$row_n <- as.numeric(rownames(plot_data_r))
+
+full_data <- rbind(plot_data_r, plot_data_R)
+
+
+
+diff_plot <- ggplot(full_data, aes(x=row_n,y = Diff)) +
+        geom_bar(fill = "cornflowerblue",  stat="identity") +
+        facet_wrap(~Type, ncol = 1)+
+        theme_bw()+
+        theme(panel.grid.major = element_line(size = 0.5, color = "grey"), 
+              axis.line = element_line(size = 0.7, color = "black"), 
+              text = element_text(size = 14), axis.text.x = element_text(angle = 0, hjust = 1))
+
+        
+diff_plot
+prod_list
