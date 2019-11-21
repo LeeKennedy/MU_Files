@@ -11,7 +11,7 @@ plot_data <- plot_data[,c(4,10,13,14)]
 prod_list <- unique(plot_data$Product)
 
 plot_data_R <- plot_data %>% 
-        filter(Product == prod_list[5]) %>% 
+        #filter(Product == prod_list[5]) %>% 
         filter(Type == "Interim Precision") %>% 
         mutate(Diff = outliers(Diff)) %>% 
         na.omit() %>% 
