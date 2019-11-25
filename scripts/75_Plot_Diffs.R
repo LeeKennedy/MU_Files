@@ -8,26 +8,35 @@ plot_data$Type2 <- paste(plot_data$Type, plot_data$Product, sep="_")
 
 plot_data <- plot_data[,c(4,10,13,14)]
 
-prod_list <- unique(plot_data$Product)
+product_list <- unique(plot_data$Product)
+
+### Insert product number from list ----------------
+
+product <- product_list[c(1,5)]
+
+### ------------------------------------------------
 
 plot_data_R <- plot_data %>% 
-        #filter(Product == prod_list[5]) %>% 
+        filter(Product %in% product) %>% 
         filter(Type == "Interim Precision") %>% 
+        group_by(Product) %>%
         mutate(Diff = outliers(Diff)) %>% 
         na.omit() %>% 
         mutate(Diff = 100*Diff/max(abs(Diff))) %>% 
-        arrange(Diff)
-plot_data_R$row_n <- as.numeric(rownames(plot_data_R))
+        arrange(Diff) %>% 
+        mutate(row_n = row_number())
+
 
 
 plot_data_r <- plot_data %>% 
-        #filter(Product == prod_list[1]) %>% 
+        filter(Product %in% product) %>% 
         filter(Type == "Repeatability") %>% 
+        group_by(Product) %>%
         mutate(Diff = outliers(Diff)) %>% 
         na.omit() %>% 
         mutate(Diff = 100*Diff/max(abs(Diff))) %>% 
-        arrange(Diff)
-plot_data_r$row_n <- as.numeric(rownames(plot_data_r))
+        arrange(Diff)%>% 
+        mutate(row_n = row_number())
 
 full_data <- rbind(plot_data_r, plot_data_R)
 
