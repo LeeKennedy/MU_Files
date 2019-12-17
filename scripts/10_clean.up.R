@@ -15,7 +15,7 @@ colnames(x)[1] <- "SAMPLE_NUMBER"
 testcodes <- length(unique(x$ANALYSIS))
 if (testcodes > 1) {
         message("More than one test code present")
-        stop()
+       
 }
 #----------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ print(units_2)
 
 # Program -------------------------------------------------------------
 
-lims <- read_csv("BASA01.csv")
+lims <- read_csv("PROT02.csv")
 lims <- strip_mm(lims)
 
 summary_data(lims)
