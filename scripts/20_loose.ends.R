@@ -10,7 +10,7 @@ lims <- lims %>%
 
 # Filter on Reported Name -------------------------------------------------
 lims <- lims %>%
-        filter(REPORTED_NAME == "Protein (TN x 6.38)")
+        filter(REPORTED_NAME == "Chloride")
 
 # Filter on Two Reported Names -------------------------------------------------
 lims <- lims %>%
@@ -25,7 +25,7 @@ lims <- lims %>%
 lims$REPORTED_NAME <- analyte
 
 # Change Reported Name ----------------------------------------------------
-lims$REPORTED_NAME <- "pH"
+lims$REPORTED_NAME <- "Ash (550degC)"
 
 # Select customer----------------------------------------------------------
 lims <- select(lims, everything())%>%

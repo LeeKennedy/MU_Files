@@ -111,7 +111,7 @@ lims6 <- within(lims6, {
 x1 <- which((lims6$RD=="D" & lims6$Rep2==1))
 x2 <- which((lims6$RD=="R" & lims6$Rep2==1))
 lims6$Type[x1] <- "Repeatability"
-lims6$Type[x2] <- "Interim Precision"
+lims6$Type[x2] <- "Reproducibility"
 
 # Re-orders columns, deletes unwanted.-------------------------------------------------------
 lims6 <- lims6[,(c(1:11,14,15,13,16))]
@@ -151,7 +151,7 @@ for (i in 1:m) {
         
         setnames(reprod2, c("A","B"))
         
-        reprod2$Type <- "Interim Precision"
+        reprod2$Type <- "Reproducibility"
         reprod2$Sample <- as.numeric(sample[1])
         reprod2$Date <- as.character(sample[2])
         reprod2$Customer <- as.character(sample[3])
@@ -236,7 +236,7 @@ write.csv(results1, file= paste(file.name,".csv", sep=""), row.names=FALSE)
 # Cleaning Precision data -----------------------------------------------------------------
 f0 <- results
 f0$Prod2 <- f0$Product
-ff1 <- subset(f0, Type=="Interim Precision")
+ff1 <- subset(f0, Type=="Reproducibility")
 f1 <- ff1
 
 # Calculate differences and square differences --------------------------------------------
@@ -276,7 +276,7 @@ remove.outliers <- function(x, na.rm = TRUE, ...) {
         y
 }
 
-# Create dummy data for case where no Interim Precision -----------------------------------
+# Create dummy data for case where no Reproducibility -----------------------------------
 f1_flag = 0
 
 if(nrow(f1) == 0) {
@@ -309,7 +309,7 @@ b4 <- f1 %>%
                   b2 = mean(A),
                   b3c = stdd(f5))
 
-b4$Type <- "Interim Precision"
+b4$Type <- "Reproducibility"
 b4$Products <- row.names(b4)
 b4$Analyte <- f0$Name[1]
 b4$Conc <- ""
@@ -448,7 +448,7 @@ for (i in 1:aa) {
         srm <- as.data.frame(srm)
         colnames(srm)[1] <- c("Mean")
         
-        srm$Type <- "Interim Precision"
+        srm$Type <- "Reproducibility"
         srm$Matrix <- "SRM Matrix"
         srm$Analyte <- data.in4$REPORTED_NAME[1]
         srm$Conc <- ""
