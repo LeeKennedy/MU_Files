@@ -2,7 +2,7 @@
 
 # Filter on Units ---------------------------------------------------------
 lims <- lims %>%
-        filter(UNITS == "NONE")
+        filter(UNITS == "G_P_ML")
 
 # Filter on Analysis ------------------------------------------------------
 lims <- lims %>%
@@ -10,11 +10,11 @@ lims <- lims %>%
 
 # Filter on Reported Name -------------------------------------------------
 lims <- lims %>%
-        filter(REPORTED_NAME == "Chloride")
+        filter(REPORTED_NAME == "pH")
 
 # Filter on Two Reported Names -------------------------------------------------
 lims <- lims %>%
-        filter(REPORTED_NAME == "Pantothenic Acid" | REPORTED_NAME == "Pantothenic Acid [m/m]")
+        filter(REPORTED_NAME == "Choline (Free)" | REPORTED_NAME == "Choline")
 
 
 # Filter on Two Reported Names [m/m] ---------------------------------------------

@@ -35,7 +35,7 @@ print(units_2)
 
 # Program -------------------------------------------------------------
 
-lims <- read_csv("SALT01.csv")
+lims <- read_csv("Bismuth.csv")
 lims <- strip_mm(lims)
 
 summary_data(lims)
