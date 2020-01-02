@@ -10,7 +10,7 @@ lims <- lims %>%
 
 # Filter on Reported Name -------------------------------------------------
 lims <- lims %>%
-        filter(REPORTED_NAME == "Vitamin B6 (Pyridoxine)")
+        filter(REPORTED_NAME == "dl-alpha-Tocopherol")
 
 # Filter on Two Reported Names -------------------------------------------------
 lims <- lims %>%
