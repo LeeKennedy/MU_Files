@@ -25,7 +25,7 @@ lims <- lims %>%
 lims$REPORTED_NAME <- analyte
 
 # Change Reported Name ----------------------------------------------------
-lims$REPORTED_NAME <- "Ash (550degC)"
+lims$REPORTED_NAME <- "Reducing Sugars"
 
 # Select customer----------------------------------------------------------
 lims <- select(lims, everything())%>%
