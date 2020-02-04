@@ -2,7 +2,7 @@
 
 # Filter on Units ---------------------------------------------------------
 lims <- lims %>%
-        filter(UNITS == "G_P_ML")
+        filter(UNITS == "PCT_V-V")
 
 # Filter on Analysis ------------------------------------------------------
 lims <- lims %>%
@@ -10,7 +10,7 @@ lims <- lims %>%
 
 # Filter on Reported Name -------------------------------------------------
 lims <- lims %>%
-        filter(REPORTED_NAME == "dl-alpha-Tocopherol")
+        filter(REPORTED_NAME == "Tyramine")
 
 # Filter on Two Reported Names -------------------------------------------------
 lims <- lims %>%
