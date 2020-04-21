@@ -2,7 +2,7 @@
 
 # Filter on Units ---------------------------------------------------------
 lims <- lims %>%
-        filter(UNITS == "MG_P_ML")
+        filter(UNITS == "PCT_M-V" | UNITS == "G_P_100ML")
 
 # Filter on Analysis ------------------------------------------------------
 lims <- lims %>%
