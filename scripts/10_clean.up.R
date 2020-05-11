@@ -35,8 +35,11 @@ print(units_2)
 
 # Program -------------------------------------------------------------
 
-lims <- read_csv("NITF03.csv")
+lims <- read_csv("2020.csv")
 lims <- strip_mm(lims)
 
 summary_data(lims)
 table(lims$REPORTED_NAME)
+
+
+
