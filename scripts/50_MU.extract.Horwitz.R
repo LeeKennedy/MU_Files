@@ -24,6 +24,7 @@ if(nchar(data.in$LOGIN_DATE[1])==13){
         date.temp <- dmy_hms(data.in$DATE_STARTED)
 }
 
+# Un-comment next line if date issues ---------
 # date.temp <- ymd_hms(data.in$DATE_STARTED)
 
 
