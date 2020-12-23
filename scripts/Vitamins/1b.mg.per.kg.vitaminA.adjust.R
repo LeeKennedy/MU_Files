@@ -26,6 +26,10 @@ unit <- which((lims$UNITS=="MG_P_G"))
 lims$UNITS[unit] <- "MG_P_KG"
 lims$ENTRY[unit] <- as.numeric(lims$ENTRY[unit]) * 1000
 
+unit <- which((lims$UNITS=="IU_P_KG"))
+lims$UNITS[unit] <- "MG_P_KG"
+lims$ENTRY[unit] <- as.numeric(lims$ENTRY[unit]) * 0.03
+
 lims2 <- lims[which(lims$UNITS %in% "MG_P_KG"),]
 
 #Omits any remaining items with irregular units.

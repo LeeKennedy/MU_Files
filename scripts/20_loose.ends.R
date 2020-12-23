@@ -10,7 +10,7 @@ lims <- lims %>%
 
 # Filter on Reported Name -------------------------------------------------
 lims <- lims %>%
-        filter(REPORTED_NAME == "Vitamin A")
+        filter(REPORTED_NAME == "Moisture")
 
 # Filter on Two Reported Names -------------------------------------------------
 lims <- lims %>%
@@ -25,7 +25,7 @@ lims <- lims %>%
 lims$REPORTED_NAME <- analyte
 
 # Change Reported Name ----------------------------------------------------
-lims$REPORTED_NAME <- "Reducing Sugars"
+lims$REPORTED_NAME <- "Titratable Acidity"
 
 # Select customer----------------------------------------------------------
 lims <- select(lims, everything())%>%
